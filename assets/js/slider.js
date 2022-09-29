@@ -50,6 +50,7 @@ contentSlide.addEventListener('click', function (e) {
 });
 
 const dotSlide = (n) => {
+  slideIndex = n;
   slideOldIndex.classList.remove('fadeIn');
   slideOldIndex.classList.add('fadeOut');
   dot[dotOld].innerHTML = '';
