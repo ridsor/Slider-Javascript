@@ -101,19 +101,25 @@ img {
   border-radius: 50%;
   background-color: white;
   position: relative;
-}
-.dot .active {
-  width: 13px;
-  height: 13px;
-  background-color: #000;
-  border-radius: 50%;
+  transition: 0.6s;
+  border: 1px solid #fff;
 }
 
-/* @media screen and (max-width: 768px) {
-  .content-slide {
-    margin: 8px 50px 12px 50px;
+.page .active {
+  background-color: crimson;
+}
+
+.page .dot:hover,
+.page .ot:active {
+  background-color: crimson;
+}
+
+@media screen and (max-width: 768px) {
+  .content-slide .text {
+    bottom: inherit;
+    top: 1rem;
   }
-} */
+}
 
 @keyframes fadeIn {
   from {

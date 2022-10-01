@@ -3,33 +3,46 @@ let dotOld = 0;
 const slides = document.querySelectorAll('.img-slide');
 const dot = document.querySelectorAll('.dot');
 let slideOldIndex = slides[slideIndex];
+let oldDot = dot[slideIndex];
 slideOldIndex.style.display = 'block';
 slideOldIndex.classList.add('fadeIn');
+dot[slideIndex].classList.add('active');
 
-const nextSlide = (n) => {
-  slideIndex += n;
-
-  if (slideIndex > slides.length - 1) {
+const showSlide = (n) => {
+  if (n > slides.length - 1) {
     slideIndex = 0;
   }
 
-  if (slideIndex < 0) {
+  if (n < 0) {
     slideIndex = slides.length - 1;
   }
 
-  slideOldIndex.classList.remove('fadeIn');
-  slideOldIndex.classList.add('fadeOut');
-  dot[dotOld].innerHTML = '';
+  // slideOldIndex.classList.remove('fadeIn');
+  // slideOldIndex.classList.add('fadeOut');
+  // dot[dotOld].innerHTML = '';
 
-  setTimeout(() => {
-    dot[slideIndex].innerHTML = `<div class="active"></div>`;
-    dotOld = slideIndex;
-    slideOldIndex.style.display = 'none';
-    slideOldIndex.classList.remove('fadeOut');
-    slideOldIndex = slides[slideIndex];
-    slides[slideIndex].classList.add('fadeIn');
-    slides[slideIndex].style.display = 'block';
-  }, 250);
+  // setTimeout(() => {
+  //   dot[slideIndex].innerHTML = `<div class="active"></div>`;
+  //   dotOld = slideIndex;
+  //   slideOldIndex.style.display = 'none';
+  //   slideOldIndex.classList.remove('fadeOut');
+  //   slideOldIndex = slides[slideIndex];
+  //   slides[slideIndex].classList.add('fadeIn');
+  //   slides[slideIndex].style.display = 'block';
+  // }, 250);
+
+  slideOldIndex.style.display = 'none';
+  oldDot.classList.remove('active');
+  slideOldIndex.classList.remove('fadeIn');
+  slideOldIndex = slides[slideIndex];
+  oldDot = dot[slideIndex];
+  dot[slideIndex].classList.add('active');
+  slides[slideIndex].style.display = 'block';
+  slides[slideIndex].classList.add('fadeIn');
+};
+
+const nextSlide = (n) => {
+  showSlide((slideIndex += n));
 };
 
 let interval = setInterval(() => {
@@ -50,17 +63,19 @@ contentSlide.addEventListener('click', function (e) {
 });
 
 const dotSlide = (n) => {
-  slideIndex = n;
-  slideOldIndex.classList.remove('fadeIn');
-  slideOldIndex.classList.add('fadeOut');
-  dot[dotOld].innerHTML = '';
-  setTimeout(() => {
-    dot[n].innerHTML = `<div class="active"></div>`;
-    slideOldIndex.style.display = 'none';
-    slideOldIndex.classList.remove('fadeOut');
-    slideOldIndex = slides[n];
-    dotOld = n;
-    slides[n].classList.add('fadeIn');
-    slides[n].style.display = 'block';
-  }, 250);
+  showSlide((slideIndex = n));
+
+  // slideIndex = n;
+  // slideOldIndex.classList.remove('fadeIn');
+  // slideOldIndex.classList.add('fadeOut');
+  // dot[dotOld].innerHTML = '';
+  // setTimeout(() => {
+  //   dot[n].innerHTML = `<div class="active"></div>`;
+  //   slideOldIndex.style.display = 'none';
+  //   slideOldIndex.classList.remove('fadeOut');
+  //   slideOldIndex = slides[n];
+  //   dotOld = n;
+  //   slides[n].classList.add('fadeIn');
+  //   slides[n].style.display = 'block';
+  // }, 250);
 };
